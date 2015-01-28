@@ -163,12 +163,12 @@ $culsrc     =   '/cul/src'
             }
 #Pull in user home directory contents
 
-cul_users { $users_array:; }
+#cul_users { $users_array:; }
 
-   #Set up our local nagios plugins
-    if $fqdn !~ /^vclnode(\d+)\./ {
-        include cul_nagios
-    }
+#   #Set up our local nagios plugins
+#    if $fqdn !~ /^vclnode(\d+)\./ {
+#        include cul_nagios
+#    }
    }
   }
 }
