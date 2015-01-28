@@ -9,32 +9,32 @@ class base{
   
 ### Create the default /cul file structure
 
-$culroot	=	'/cul'
-$approot	=	'/cul/app'
-$webroot	=	'/cul/web'
-$dbroot		= 	'/cul/db'
-$logroot	= 	'/cul/log'
-$culbin		= 	'/cul/bin'
-$culshare	= 	'/cul/share'
-$culbackup	= 	'/cul/backup'
-$culdata	= 	'/cul/data'
-$culsrc		=	'/cul/src'
+$culroot    =   '/cul'
+$approot    =   '/cul/app'
+$webroot    =   '/cul/web'
+$dbroot     =   '/cul/db'
+$logroot    =   '/cul/log'
+$culbin     =   '/cul/bin'
+$culshare   =   '/cul/share'
+$culbackup  =   '/cul/backup'
+$culdata    =   '/cul/data'
+$culsrc     =   '/cul/src'
 
 
                 file {"${culroot}":
-			ensure	=> directory,
-			owner	=> root,
-			group	=> root,
-            		replace => false,
-			mode	=> 755
-		}
+            ensure  => directory,
+            owner   => root,
+            group   => root,
+                    replace => false,
+            mode    => 755
+        }
 
                 file {"${approot}":
                         ensure  => directory,
                         owner   => root,
                         group   => root,
                         mode    => 755,
-			require	=> File["${culroot}"]
+            require => File["${culroot}"]
                 }
 
                 file {"${webroot}":
@@ -61,7 +61,7 @@ $culsrc		=	'/cul/src'
                         require => File["${culroot}"]
                 }
 
-		file {"${culbin}":                                                                                            
+        file {"${culbin}":                                                                                            
                         ensure  => directory,                                                                                
                         owner   => root,                                                                                     
                         group   => root,                                                                                     
@@ -69,15 +69,15 @@ $culsrc		=	'/cul/src'
                         require => File["${culroot}"]                                                                          
                 }
                 
-		file {"${culshare}":
+        file {"${culshare}":
                         ensure  => directory,
                         owner   => root,
                         group   => root,
                         mode    => 755,
                         require => File["${culroot}"]
                 }
-	       
-		file {"${culbackup}":                                                                                                                            
+           
+        file {"${culbackup}":                                                                                                                            
                         ensure  => directory,                                                                                                                   
                         owner   => root,                                                                                                                        
                         group   => root,                                                                                                                        
@@ -85,7 +85,7 @@ $culsrc		=	'/cul/src'
                         require => File["${culroot}"]                                                                                                           
                 }
 
-		file {"${culdata}":                                                                                                                            
+        file {"${culdata}":                                                                                                                            
                         ensure  => directory,                                                                                                                   
                         owner   => root,                                                                                                                        
                         group   => root,                                                                                                                        
@@ -94,8 +94,8 @@ $culsrc		=	'/cul/src'
                 }
        
  
-		file {"${culsrc}":
-        		ensure  => directory,                                                                                                                   
+        file {"${culsrc}":
+                ensure  => directory,                                                                                                                   
                         owner   => root,                                                                                                                        
                         group   => root,                                                                                                                        
                         mode    => 755,                                                                                                                         
@@ -103,41 +103,41 @@ $culsrc		=	'/cul/src'
                 }
 
                 
-       	        file {'/etc/yum.repos.d/libsys.repo':
-			source 	=> 'puppet:///modules/base/libsys.repo',
-			owner 	=> 'root',
-			group	=> 'root',
-			mode	=> '644'
-		      }
+                file {'/etc/yum.repos.d/libsys.repo':
+            source  => 'puppet:///modules/base/libsys.repo',
+            owner   => 'root',
+            group   => 'root',
+            mode    => '644'
+              }
 
-		file { "${culshare}/nicenames":
-			ensure	=> present,
-			source	=> 'puppet:///modules/base/nicenames',
-			owner	=> root,
-			group	=> root,
-			mode	=> 755,
-		      }
-	
-		file { "${culbin}/nicename":
-			ensure => file,
-			source => 'puppet:///modules/base/nicename.sh',
-			mode   => 0755,
-			require	=> File["${culshare}/nicenames"],
-		}
-			
-		file { "/bin/perl":
-			ensure	=> link,
-			target	=> "/usr/bin/perl"
-		}
+        file { "${culshare}/nicenames":
+            ensure  => present,
+            source  => 'puppet:///modules/base/nicenames',
+            owner   => root,
+            group   => root,
+            mode    => 755,
+              }
+    
+        file { "${culbin}/nicename":
+            ensure => file,
+            source => 'puppet:///modules/base/nicename.sh',
+            mode   => 0755,
+            require => File["${culshare}/nicenames"],
+        }
+            
+        file { "/bin/perl":
+            ensure  => link,
+            target  => "/usr/bin/perl"
+        }
 
-		file { "/etc/profile.d/cul.sh":
-			ensure	=> present,
-			source	=> 'puppet:///modules/base/cul.sh',
-		}
-		
-		package { "ruby-rdoc":
-			ensure  => installed,
-		}
+        file { "/etc/profile.d/cul.sh":
+            ensure  => present,
+            source  => 'puppet:///modules/base/cul.sh',
+        }
+        
+        package { "ruby-rdoc":
+            ensure  => installed,
+        }
 
         package {"apg":
             ensure  => installed,
@@ -152,15 +152,15 @@ $culsrc		=	'/cul/src'
         }
 
         file {'/var/lib/puppet/state':
-	        ensure  => directory,
-	        mode    => '1755',
-	        }
+            ensure  => directory,
+            mode    => '1755',
+            }
 
-		service { "puppet":
-        		enable      => "true",
-        		ensure      => "running",
-        		hasstatus   => "true"
-    		}
+        service { "puppet":
+                enable      => "true",
+                ensure      => "running",
+                hasstatus   => "true"
+            }
 #Pull in user home directory contents
 
 cul_users { $users_array:; }
