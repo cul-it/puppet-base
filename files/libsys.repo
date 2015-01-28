@@ -1,0 +1,12 @@
+[libsys]
+name=Library Systems RPM Repository
+baseurl=http://arden01.library.cornell.edu/repo/RHEL/$releasever/$basearch
+enabled=1
+keepcache=0
+
+[libsys-noarch]
+name=Library Systems NoArch RPMs
+baseurl=http://arden01.library.cornell.edu/repo/RHEL/$releasever/noarch
+enabled=1
+keepcache=0
+
