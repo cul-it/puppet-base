@@ -22,139 +22,139 @@ $culsrc     =   '/cul/src'
 
 
                 file {"${culroot}":
-            ensure  => directory,
-            owner   => root,
-            group   => root,
+                    ensure  => directory,
+                    owner   => root,
+                    group   => root,
                     replace => false,
-            mode    => 755
-        }
+                    mode    => 755
+                }
 
                 file {"${approot}":
-                        ensure  => directory,
-                        owner   => root,
-                        group   => root,
-                        mode    => 755,
-            require => File["${culroot}"]
+                    ensure  => directory,
+                    owner   => root,
+                    group   => root,
+                    mode    => 755,
+                    require => File["${culroot}"]
                 }
 
                 file {"${webroot}":
-                        ensure  => directory,
-                        owner   => root,
-                        group   => root,
-                        mode    => 755,
-                        require => File["${culroot}"]
+                    ensure  => directory,
+                    owner   => root,
+                    group   => root,
+                    mode    => 755,
+                    require => File["${culroot}"]
                 }
 
                 file {"${dbroot}":
-                        ensure  => directory,
-                        owner   => root,
-                        group   => root,
-                        mode    => 755,
-                        require => File["${culroot}"]
+                    ensure  => directory,
+                    owner   => root,
+                    group   => root,
+                    mode    => 755,
+                    require => File["${culroot}"]
                 }
 
                 file {"${logroot}":
-                        ensure  => directory,
-                        owner   => root,
-                        group   => root,
-                        mode    => 755,
-                        require => File["${culroot}"]
+                    ensure  => directory,
+                    owner   => root,
+                    group   => root,
+                    mode    => 755,
+                    require => File["${culroot}"]
                 }
 
-        file {"${culbin}":                                                                                            
-                        ensure  => directory,                                                                                
-                        owner   => root,                                                                                     
-                        group   => root,                                                                                     
-                        mode    => 755,                                                                                      
-                        require => File["${culroot}"]                                                                          
+                file {"${culbin}":                                                                                            
+                    ensure  => directory,                                                                                
+                    owner   => root,                                                                                     
+                    group   => root,                                                                                     
+                    mode    => 755,                                                                                      
+                    require => File["${culroot}"]                                                                          
                 }
                 
-        file {"${culshare}":
-                        ensure  => directory,
-                        owner   => root,
-                        group   => root,
-                        mode    => 755,
-                        require => File["${culroot}"]
+                file {"${culshare}":
+                    ensure  => directory,
+                    owner   => root,
+                    group   => root,
+                    mode    => 755,
+                    require => File["${culroot}"]
                 }
            
-        file {"${culbackup}":                                                                                                                            
-                        ensure  => directory,                                                                                                                   
-                        owner   => root,                                                                                                                        
-                        group   => root,                                                                                                                        
-                        mode    => 755,                                                                                                                         
-                        require => File["${culroot}"]                                                                                                           
+                file {"${culbackup}":                                                                                                                            
+                    ensure  => directory,                                                                                                                   
+                    owner   => root,                                                                                                                        
+                    group   => root,                                                                                                                        
+                    mode    => 755,                                                                                                                         
+                    require => File["${culroot}"]                                                                                                           
                 }
 
-        file {"${culdata}":                                                                                                                            
-                        ensure  => directory,                                                                                                                   
-                        owner   => root,                                                                                                                        
-                        group   => root,                                                                                                                        
-                        mode    => 755,                                                                                                                         
-                        require => File["${culroot}"]                                                                                                           
+                file {"${culdata}":                                                                                                                            
+                    ensure  => directory,                                                                                                                   
+                    owner   => root,                                                                                                                        
+                    group   => root,                                                                                                                        
+                    mode    => 755,                                                                                                                         
+                    require => File["${culroot}"]                                                                                                           
                 }
        
  
-        file {"${culsrc}":
-                ensure  => directory,                                                                                                                   
-                        owner   => root,                                                                                                                        
-                        group   => root,                                                                                                                        
-                        mode    => 755,                                                                                                                         
-                        require => File["${culroot}"]
+                file {"${culsrc}":
+                    ensure  => directory,                                                                                                                   
+                    owner   => root,                                                                                                                        
+                    group   => root,                                                                                                                        
+                    mode    => 755,                                                                                                                         
+                    require => File["${culroot}"]
                 }
 
                 
-                file {'/etc/yum.repos.d/libsys.repo':
-            source  => 'puppet:///modules/base/libsys.repo',
-            owner   => 'root',
-            group   => 'root',
-            mode    => '644'
-              }
+                # file {'/etc/yum.repos.d/libsys.repo':
+                #     source  => 'puppet:///modules/base/libsys.repo',
+                #     owner   => 'root',
+                #     group   => 'root',
+                #     mode    => '644'
+                #   }
 
-        file { "${culshare}/nicenames":
-            ensure  => present,
-            source  => 'puppet:///modules/base/nicenames',
-            owner   => root,
-            group   => root,
-            mode    => 755,
-              }
+                file { "${culshare}/nicenames":
+                    ensure  => present,
+                    source  => 'puppet:///modules/base/nicenames',
+                    owner   => root,
+                    group   => root,
+                    mode    => 755,
+                  }
     
-        file { "${culbin}/nicename":
-            ensure => file,
-            source => 'puppet:///modules/base/nicename.sh',
-            mode   => 0755,
-            require => File["${culshare}/nicenames"],
-        }
+                file { "${culbin}/nicename":
+                    ensure => file,
+                    source => 'puppet:///modules/base/nicename.sh',
+                    mode   => 0755,
+                    require => File["${culshare}/nicenames"],
+                }
             
-        file { "/bin/perl":
-            ensure  => link,
-            target  => "/usr/bin/perl"
-        }
+                file { "/bin/perl":
+                    ensure  => link,
+                    target  => "/usr/bin/perl"
+                }
 
-        file { "/etc/profile.d/cul.sh":
-            ensure  => present,
-            source  => 'puppet:///modules/base/cul.sh',
-        }
-        
-        package { "ruby-rdoc":
-            ensure  => installed,
-        }
+                file { "/etc/profile.d/cul.sh":
+                    ensure  => present,
+                    source  => 'puppet:///modules/base/cul.sh',
+                }
+                
+                package { "ruby-rdoc":
+                    ensure  => installed,
+                }
 
-        package {"apg":
-            ensure  => installed,
-        }
+                package {"apg":
+                    ensure  => installed,
+                }
 
-        package {'perl-Config-General':
-            ensure  => installed,
-        }
+                package {'perl-Config-General':
+                    ensure  => installed,
+                }
 
-        package {'perl-Config-Simple':
-            ensure  => installed,
-        }
+                package {'perl-Config-Simple':
+                    ensure  => installed,
+                }
 
-        file {'/var/lib/puppet/state':
-            ensure  => directory,
-            mode    => '1755',
-            }
+#                file {'/var/lib/puppet/state':
+#                   ensure  => directory,
+#                    mode    => '1755',
+#                    }
 
 #        service { "puppet":
 #                enable      => "true",
