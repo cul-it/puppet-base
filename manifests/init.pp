@@ -156,11 +156,11 @@ $culsrc     =   '/cul/src'
             mode    => '1755',
             }
 
-        service { "puppet":
-                enable      => "true",
-                ensure      => "running",
-                hasstatus   => "true"
-            }
+#        service { "puppet":
+#                enable      => "true",
+#                ensure      => "running",
+#                hasstatus   => "true"
+#            }
 #Pull in user home directory contents
 
 #cul_users { $users_array:; }
